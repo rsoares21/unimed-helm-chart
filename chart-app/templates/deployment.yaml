@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "chart-app.fullname" . }}
-  labels:
-    {{- include "chart-app.labels" . | nindent 4 }}
+  namespace: {{ .Values.namespace }}
+    labels:
+      {{- include "chart-app.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
